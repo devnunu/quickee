@@ -7,4 +7,5 @@ import org.orbitmvi.orbit.viewmodel.container
 class MainViewModel : ContainerHost<MainState, MainSideEffect>, ViewModel() {
 
     override val container = container<MainState, MainSideEffect>(MainState(""))
+
 }

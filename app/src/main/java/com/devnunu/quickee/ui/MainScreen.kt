@@ -8,9 +8,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.devnunu.quickee.theme.QuickeeTheme
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun MainScreen() {
+fun MainScreen(
+    viewModel: MainViewModel = koinViewModel()
+) {
     QuickeeTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),

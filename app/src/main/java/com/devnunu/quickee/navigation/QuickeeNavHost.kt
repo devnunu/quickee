@@ -20,7 +20,9 @@ fun QuickeeNavHost(
         navController = navController,
         startDestination = startDestination
     ) {
-        composable(MAIN) { MainScreen() }
+        composable(MAIN) {
+            MainScreen()
+        }
     }
 }
 
