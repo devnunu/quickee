@@ -90,4 +90,9 @@ dependencies {
 
     // DI
     implementation "io.insert-koin:koin-android:$koin_android_version"
+
+    // Orbit
+    implementation("org.orbit-mvi:orbit-core:$orbit_version")
+    implementation("org.orbit-mvi:orbit-viewmodel:$orbit_version")
+    implementation("org.orbit-mvi:orbit-compose:$orbit_version")
 }
