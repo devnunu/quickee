@@ -7,7 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.devnunu.quickee.navigation.QuickeeRoute.MAIN
-import com.devnunu.quickee.screen.Main
+import com.devnunu.quickee.screen.MainScreen
 
 @Composable
 fun QuickeeNavHost(
@@ -20,7 +20,7 @@ fun QuickeeNavHost(
         navController = navController,
         startDestination = startDestination
     ) {
-        composable(MAIN) { Main() }
+        composable(MAIN) { MainScreen() }
     }
 }
 

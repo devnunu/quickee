@@ -10,7 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.devnunu.quickee.ui.theme.QuickeeTheme
 
 @Composable
-fun Main() {
+fun MainScreen() {
     QuickeeTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
