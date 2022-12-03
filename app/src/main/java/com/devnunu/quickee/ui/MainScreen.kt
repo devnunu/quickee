@@ -1,4 +1,4 @@
-package com.devnunu.quickee.screen
+package com.devnunu.quickee.ui
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
@@ -7,7 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.devnunu.quickee.ui.theme.QuickeeTheme
+import com.devnunu.quickee.theme.QuickeeTheme
 
 @Composable
 fun MainScreen() {

@@ -1,4 +1,4 @@
-package com.devnunu.quickee.ui.theme
+package com.devnunu.quickee.theme
 
 import android.app.Activity
 import android.os.Build
