@@ -108,5 +108,16 @@ class MainViewModel(
         }
     }
 
-
+    /**
+     * empty
+     * */
+    fun onClickEmptyArea() = intent {
+        reduce {
+            state.copy(
+                selectedItem = null,
+                isOpenInProgressItemSnackBar = false,
+                isOpenDoneItemSnackBar = false
+            )
+        }
+    }
 }

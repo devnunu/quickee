@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.devnunu.quickee.components.QuickeeScaffold
+import com.devnunu.quickee.ext.clickableNonRipple
 import com.devnunu.quickee.theme.QuickeeTheme
 import com.devnunu.quickee.ui.components.view.QuickeeDoneItemListView
 import com.devnunu.quickee.ui.components.view.QuickeeInProgressItemListView
@@ -57,7 +58,8 @@ fun MainScreen(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Color.DarkGray),
+                    .background(Color.DarkGray)
+                    .clickableNonRipple { viewModel.onClickEmptyArea() },
             ) {
                 QuickeeInProgressItemListView(
                     modifier = Modifier
