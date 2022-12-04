@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import com.devnunu.quickee.theme.QuickeeTheme
 import com.devnunu.quickee.ui.components.QuickeeMainInput
 import com.devnunu.quickee.ui.components.QuickeeMainItemListView
+import com.devnunu.quickee.ui.components.SelectedSubFeatureBottomView
 import org.koin.androidx.compose.koinViewModel
 import org.orbitmvi.orbit.compose.collectAsState
 
@@ -45,6 +46,13 @@ fun MainScreen(
                     state = state,
                     onSelectedItem = viewModel::onSelectedItem
                 )
+                if (state.selectedItem != null) {
+                    SelectedSubFeatureBottomView(
+                        modifier = Modifier.fillMaxWidth(),
+                        state = state,
+                        onClickDeleteItem = viewModel::onClickDeleteItem
+                    )
+                }
                 Divider(
                     thickness = 1.dp,
                     color = Color.LightGray

@@ -43,7 +43,8 @@ class MainViewModel : ContainerHost<MainState, MainSideEffect>, ViewModel() {
         itemList.remove(item)
         reduce {
             state.copy(
-                itemList = itemList
+                itemList = itemList,
+                selectedItem = null
             )
         }
     }
@@ -51,7 +52,7 @@ class MainViewModel : ContainerHost<MainState, MainSideEffect>, ViewModel() {
     fun onSelectedItem(item: String) = intent {
         reduce {
             state.copy(
-                selectedItem = item
+                selectedItem = if (state.selectedItem == item) null else item
             )
         }
     }
