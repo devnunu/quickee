@@ -32,7 +32,8 @@ class MainViewModel : ContainerHost<MainState, MainSideEffect>, ViewModel() {
         reduce {
             state.copy(
                 inputValue = "",
-                itemList = itemList
+                itemList = itemList,
+                selectedItem = null
             )
         }
     }
@@ -43,6 +44,14 @@ class MainViewModel : ContainerHost<MainState, MainSideEffect>, ViewModel() {
         reduce {
             state.copy(
                 itemList = itemList
+            )
+        }
+    }
+
+    fun onSelectedItem(item: String) = intent {
+        reduce {
+            state.copy(
+                selectedItem = item
             )
         }
     }

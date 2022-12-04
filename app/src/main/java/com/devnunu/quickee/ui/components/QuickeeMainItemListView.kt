@@ -3,14 +3,11 @@ package com.devnunu.quickee.ui.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Divider
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -24,7 +21,7 @@ import com.google.accompanist.flowlayout.SizeMode
 fun QuickeeMainItemListView(
     modifier: Modifier = Modifier,
     state: MainState,
-    onClickDeleteItem: (String) -> Unit
+    onSelectedItem: (String) -> Unit
 ) {
     FlowRow(
         modifier = modifier,
@@ -34,6 +31,7 @@ fun QuickeeMainItemListView(
             Row(
                 modifier = Modifier
                     .height(IntrinsicSize.Min)
+                    .clickableNonRipple { onSelectedItem(item) }
                     .padding(vertical = 3.dp),
             ) {
                 if (index != 0) {
@@ -46,6 +44,13 @@ fun QuickeeMainItemListView(
                     )
                 }
                 Text(
+                    modifier = Modifier
+                        .composed {
+                            if (state.selectedItem == item) {
+                                this.background(Color.LightGray, RoundedCornerShape(10.dp))
+                            } else this
+                        }
+                        .padding(horizontal = 5.dp, vertical = 3.dp),
                     text = item,
                     fontSize = 14.sp
                 )
@@ -61,6 +66,6 @@ fun QuickeeMainItemListViewPreview() {
         state = MainState(
             itemList = listOf("clean", "go to market", "buy a book")
         ),
-        onClickDeleteItem = {}
+        onSelectedItem = {}
     )
 }

@@ -43,7 +43,7 @@ fun MainScreen(
                         .verticalScroll(rememberScrollState())
                         .padding(10.dp),
                     state = state,
-                    onClickDeleteItem = viewModel::onClickDeleteItem
+                    onSelectedItem = viewModel::onSelectedItem
                 )
                 Divider(
                     thickness = 1.dp,
