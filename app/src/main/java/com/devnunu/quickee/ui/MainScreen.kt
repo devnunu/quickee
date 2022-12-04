@@ -15,6 +15,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.devnunu.quickee.components.QuickeeScaffold
 import com.devnunu.quickee.theme.QuickeeTheme
 import com.devnunu.quickee.ui.components.QuickeeDoneItemListView
@@ -23,7 +26,9 @@ import com.devnunu.quickee.ui.components.SelectedSubFeatureBottomView
 import com.devnunu.quickee.ui.components.bottomSheet.MainBottomSheet
 import com.devnunu.quickee.ui.components.bottomSheet.MainBottomSheetTag
 import com.devnunu.quickee.ui.components.view.CommonSubFeatureBottomView
+import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.orbitmvi.orbit.compose.collectAsState
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -36,7 +41,7 @@ fun MainScreen(
 
     BackHandler(
         onBack = {
-            if (state.isShowBottomSheet != null) {
+            if (state.isShowBottomSheet) {
                 viewModel.onChangeBottomSheetState(null)
             } else {
                 onBackPressed()

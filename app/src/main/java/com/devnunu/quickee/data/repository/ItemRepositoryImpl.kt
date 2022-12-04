@@ -1,14 +1,35 @@
 package com.devnunu.quickee.data.repository
 
 import com.devnunu.quickee.data.model.QuickeeItem
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.filter
 
 class ItemRepositoryImpl : ItemRepository {
 
-    private val quickeeItemList: List<QuickeeItem> = emptyList()
+    private val quickeeItemList = MutableStateFlow<List<QuickeeItem>>(emptyList())
 
-    override fun getQuickeeInProgressItemList(): List<QuickeeItem> =
-        quickeeItemList.filter { !it.isDone }
+    override fun getQuickeeItemList(): StateFlow<List<QuickeeItem>> =
+        quickeeItemList
 
-    override fun getQuickeeDoneItemList(): List<QuickeeItem> =
-        quickeeItemList.filter { it.isDone }
+    override fun addQuickeeItem(item: QuickeeItem) {
+        val itemList = quickeeItemList.value.toMutableList()
+        itemList.add(0, item)
+        quickeeItemList.value = itemList
+    }
+
+    override fun deleteQuickeeItem(item: QuickeeItem) {
+        val itemList = quickeeItemList.value.toMutableList()
+        itemList.remove(item)
+        quickeeItemList.value = itemList
+    }
+
+    override fun updateQuickeeItemDone(item: QuickeeItem) {
+        val itemList = quickeeItemList.value
+        val index = itemList.indexOf(item)
+        if (index > 0) {
+            itemList.getOrNull(index)?.isDone = true
+        }
+    }
 }

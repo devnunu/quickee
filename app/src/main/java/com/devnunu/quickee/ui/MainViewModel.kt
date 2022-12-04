@@ -7,6 +7,7 @@ import com.devnunu.quickee.ui.components.bottomSheet.MainBottomSheetTag
 import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.reduce
+import org.orbitmvi.orbit.syntax.simple.repeatOnSubscription
 import org.orbitmvi.orbit.viewmodel.container
 
 class MainViewModel(
@@ -16,15 +17,19 @@ class MainViewModel(
     override val container = container<MainState, MainSideEffect>(MainState())
 
     init {
-        start()
+        collectDataFlow()
     }
 
-    private fun start() = intent {
-        reduce {
-            state.copy(
-                inProgressItemList = itemRepository.getQuickeeInProgressItemList(),
-                doneItemList = itemRepository.getQuickeeDoneItemList()
-            )
+    private fun collectDataFlow() = intent {
+        repeatOnSubscription {
+            itemRepository.getQuickeeItemList().collect { itemList ->
+                reduce {
+                    state.copy(
+                        inProgressItemList = itemList.filter { !it.isDone },
+                        doneItemList = itemList.filter { it.isDone },
+                    )
+                }
+            }
         }
     }
 
@@ -43,32 +48,26 @@ class MainViewModel(
         }
     }
 
-    fun onClickDoneBtn() = intent {
-        val itemList = state.inProgressItemList.toMutableList()
+    fun onClickRegisterBtn() = intent {
         val inputValue = state.inputValue
         if (!inputValue.isNullOrBlank()) {
-            itemList.add(0, QuickeeItem(value = inputValue))
+            val item = QuickeeItem(value = inputValue)
+            itemRepository.addQuickeeItem(item)
+            reduce {
+                state.copy(
+                    showBottomSheetTag = null,
+                    inputValue = null
+                )
+            }
         } else {
             // TODO : error
-        }
-
-        reduce {
-            state.copy(
-                inputValue = "",
-                inProgressItemList = itemList,
-                selectedItem = null
-            )
         }
     }
 
     fun onClickDeleteItem(item: QuickeeItem) = intent {
-        val itemList = state.inProgressItemList.toMutableList()
-        itemList.remove(item)
+        itemRepository.deleteQuickeeItem(item)
         reduce {
-            state.copy(
-                inProgressItemList = itemList,
-                selectedItem = null
-            )
+            state.copy(selectedItem = null)
         }
     }
 
