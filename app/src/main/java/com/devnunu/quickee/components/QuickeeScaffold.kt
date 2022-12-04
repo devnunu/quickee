@@ -26,7 +26,7 @@ fun QuickeeScaffold(
     LaunchedEffect(isShowBottomSheet) {
         scope.launch {
             if (isShowBottomSheet) {
-                bottomSheetState.show()
+                bottomSheetState.expand()
             } else {
                 bottomSheetState.hide()
             }
