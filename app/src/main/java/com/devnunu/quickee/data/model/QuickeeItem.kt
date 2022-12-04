@@ -9,4 +9,5 @@ data class QuickeeItem(
     @PrimaryKey(autoGenerate = true) val id: Int? = null,
     @ColumnInfo(name = "value") val value: String,
     @ColumnInfo(name = "isDone") var isDone: Boolean = false,
+    @ColumnInfo(name = "modifiedAt") val modifiedAt: Long = System.currentTimeMillis()
 )

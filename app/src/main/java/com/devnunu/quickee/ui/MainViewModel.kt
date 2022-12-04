@@ -25,8 +25,8 @@ class MainViewModel(
             itemRepository.getQuickeeItemList().collect { itemList ->
                 reduce {
                     state.copy(
-                        inProgressItemList = itemList.filter { !it.isDone },
-                        doneItemList = itemList.filter { it.isDone },
+                        inProgressItemList = itemList.filter { !it.isDone }.sortedByDescending { it.modifiedAt },
+                        doneItemList = itemList.filter { it.isDone }.sortedByDescending { it.modifiedAt },
                     )
                 }
             }
