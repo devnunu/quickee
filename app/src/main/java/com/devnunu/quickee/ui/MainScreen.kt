@@ -3,10 +3,7 @@ package com.devnunu.quickee.ui
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.*
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ExperimentalMaterialApi
@@ -64,37 +61,40 @@ fun MainScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(1f)
-                        .padding(bottom = 50.dp)
                         .verticalScroll(rememberScrollState())
                         .padding(horizontal = 20.dp, vertical = 30.dp),
                     state = state,
                     onSelectedItem = viewModel::onSelectedItem
                 )
-                AnimatedVisibility(
-                    visible = state.isOpenInProgressItemSnackBar,
-                    enter = slideInVertically(initialOffsetY = { it }),
-                    exit = slideOutVertically(targetOffsetY = { it })
+                Column(
+                    modifier = Modifier.heightIn(min = 60.dp)
                 ) {
-                    SelectedSubFeatureSnackBar(
-                        modifier = Modifier.fillMaxWidth(),
-                        state = state,
-                        onClickChangeSortOrder = viewModel::onClickChangeSortOrder,
-                        onClickEditItem = viewModel::onClickEditItem,
-                        onClickDoneItem = viewModel::onClickDoneItem,
-                        onClickDeleteItem = viewModel::onClickDeleteItem
-                    )
-                }
-                AnimatedVisibility(
-                    visible = state.isOpenDoneItemSnackBar,
-                    enter = slideInVertically(initialOffsetY = { it }),
-                    exit = slideOutVertically(targetOffsetY = { it })
-                ) {
-                    DoneSubFeatureSnackBar(
-                        modifier = Modifier.fillMaxWidth(),
-                        state = state,
-                        onClickDeleteItem = viewModel::onClickDeleteItem,
-                        onClickRestoreBtn = viewModel::onClickRestoreBtn
-                    )
+                    AnimatedVisibility(
+                        visible = state.isOpenInProgressItemSnackBar,
+                        enter = slideInVertically(initialOffsetY = { it }),
+                        exit = slideOutVertically(targetOffsetY = { it })
+                    ) {
+                        SelectedSubFeatureSnackBar(
+                            modifier = Modifier.fillMaxWidth(),
+                            state = state,
+                            onClickChangeSortOrder = viewModel::onClickChangeSortOrder,
+                            onClickEditItem = viewModel::onClickEditItem,
+                            onClickDoneItem = viewModel::onClickDoneItem,
+                            onClickDeleteItem = viewModel::onClickDeleteItem
+                        )
+                    }
+                    AnimatedVisibility(
+                        visible = state.isOpenDoneItemSnackBar,
+                        enter = slideInVertically(initialOffsetY = { it }),
+                        exit = slideOutVertically(targetOffsetY = { it })
+                    ) {
+                        DoneSubFeatureSnackBar(
+                            modifier = Modifier.fillMaxWidth(),
+                            state = state,
+                            onClickDeleteItem = viewModel::onClickDeleteItem,
+                            onClickRestoreBtn = viewModel::onClickRestoreBtn
+                        )
+                    }
                 }
                 QuickeeDoneItemListView(
                     state = state,
