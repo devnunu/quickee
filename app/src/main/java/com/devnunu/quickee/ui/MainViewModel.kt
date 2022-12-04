@@ -95,7 +95,7 @@ class MainViewModel(
      * In Progress SnackBar Btn
      * */
     fun onClickDoneItem(item: QuickeeItem) = intent {
-        itemRepository.updateQuickeeItemDone(item)
+        itemRepository.updateQuickeeItemDone(item, true)
         reduce {
             state.copy(selectedItem = null)
         }
@@ -109,11 +109,22 @@ class MainViewModel(
     }
 
     /**
+     * Done Snack Bar Btn
+     * */
+    fun onClickRestoreBtn(item: QuickeeItem) = intent {
+        itemRepository.updateQuickeeItemDone(item, false)
+        reduce {
+            state.copy(selectedItem = null)
+        }
+    }
+
+    /**
      * empty
      * */
     fun onClickEmptyArea() = intent {
         reduce {
             state.copy(
+                showBottomSheetTag = if (state.hasSelectedItem) null else MainBottomSheetTag.INPUT,
                 selectedItem = null,
                 isOpenInProgressItemSnackBar = false,
                 isOpenDoneItemSnackBar = false

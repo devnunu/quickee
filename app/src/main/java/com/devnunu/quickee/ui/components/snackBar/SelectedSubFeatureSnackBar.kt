@@ -4,8 +4,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -14,9 +13,10 @@ import androidx.compose.ui.unit.dp
 import com.devnunu.quickee.data.model.QuickeeItem
 import com.devnunu.quickee.ui.MainState
 import com.devnunu.quickee.ui.components.btn.SubFeatureIconBtn
+import com.devnunu.quickee.ui.components.btn.SubFeatureIconWithTextBtn
 
 @Composable
-fun SelectedSubFeatureBottomView(
+fun SelectedSubFeatureSnackBar(
     modifier: Modifier = Modifier,
     state: MainState,
     onClickDoneItem: (QuickeeItem) -> Unit,
@@ -38,14 +38,15 @@ fun SelectedSubFeatureBottomView(
         Spacer(
             modifier = Modifier.weight(1f)
         )
-        SubFeatureIconBtn(
-            imageVector = Icons.Default.Done,
+        SubFeatureIconWithTextBtn(
+            imageVector = Icons.Default.KeyboardArrowDown,
             background = Color.LightGray,
             onClickBtn = {
                 state.selectedItem?.let {
                     onClickDoneItem(it)
                 }
-            }
+            },
+            text = "DONE"
         )
     }
 }
@@ -53,7 +54,7 @@ fun SelectedSubFeatureBottomView(
 @Preview(showBackground = true)
 @Composable
 fun SelectedSubFeatureBottomViewPreview() {
-    SelectedSubFeatureBottomView(
+    SelectedSubFeatureSnackBar(
         state = MainState(),
         onClickDoneItem = {},
         onClickDeleteItem = {}

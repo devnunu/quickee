@@ -7,19 +7,21 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.devnunu.quickee.data.model.QuickeeItem
 import com.devnunu.quickee.ext.clickableNonRipple
+import com.devnunu.quickee.ui.MainState
 
 @Composable
-fun CommonSubFeatureBottomView(
+fun DoneSubFeatureSnackBar(
     modifier: Modifier = Modifier,
-    onClickInputBtn: () -> Unit
+    state: MainState,
+    onClickRestoreBtn: (QuickeeItem) -> Unit
 ) {
     Row(
         modifier = modifier
@@ -34,7 +36,9 @@ fun CommonSubFeatureBottomView(
                 .padding(horizontal = 12.dp, vertical = 3.dp)
                 .size(18.dp)
                 .clickableNonRipple {
-                    onClickInputBtn()
+                    state.selectedItem?.let {
+                        onClickRestoreBtn(it)
+                    }
                 },
             imageVector = Icons.Default.Edit,
             contentDescription = null,

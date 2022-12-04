@@ -16,6 +16,6 @@ interface QuickeeItemDao {
     @Delete
     fun deleteQuickeeItem(item: QuickeeItem)
 
-    @Query("UPDATE items SET isDone = 1 WHERE id = :id")
-    fun updateQuickeeItemDone(id: Int)
+    @Query("UPDATE items SET isDone = :isDone WHERE id = :id")
+    fun updateQuickeeItemDone(id: Int, isDone: Boolean)
 }

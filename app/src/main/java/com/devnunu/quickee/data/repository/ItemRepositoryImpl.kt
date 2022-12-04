@@ -19,9 +19,9 @@ class ItemRepositoryImpl(
         quickeeItemDao.deleteQuickeeItem(item)
     }
 
-    override fun updateQuickeeItemDone(item: QuickeeItem) {
+    override fun updateQuickeeItemDone(item: QuickeeItem, isDone: Boolean) {
         item.id?.let { id ->
-            quickeeItemDao.updateQuickeeItemDone(id)
+            quickeeItemDao.updateQuickeeItemDone(id, isDone)
         }
     }
 }

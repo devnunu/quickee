@@ -21,10 +21,10 @@ import com.devnunu.quickee.ext.clickableNonRipple
 import com.devnunu.quickee.theme.QuickeeTheme
 import com.devnunu.quickee.ui.components.view.QuickeeDoneItemListView
 import com.devnunu.quickee.ui.components.view.QuickeeInProgressItemListView
-import com.devnunu.quickee.ui.components.view.SelectedSubFeatureBottomView
+import com.devnunu.quickee.ui.components.view.SelectedSubFeatureSnackBar
 import com.devnunu.quickee.ui.components.bottomSheet.MainBottomSheet
 import com.devnunu.quickee.ui.components.bottomSheet.MainBottomSheetTag
-import com.devnunu.quickee.ui.components.view.CommonSubFeatureBottomView
+import com.devnunu.quickee.ui.components.view.DoneSubFeatureSnackBar
 import org.koin.androidx.compose.koinViewModel
 import org.orbitmvi.orbit.compose.collectAsState
 
@@ -65,6 +65,7 @@ fun MainScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(1f)
+                        .padding(bottom = 50.dp)
                         .verticalScroll(rememberScrollState())
                         .padding(horizontal = 20.dp, vertical = 30.dp),
                     state = state,
@@ -75,7 +76,7 @@ fun MainScreen(
                     enter = slideInVertically(initialOffsetY = { it }),
                     exit = slideOutVertically(targetOffsetY = { it })
                 ) {
-                    SelectedSubFeatureBottomView(
+                    SelectedSubFeatureSnackBar(
                         modifier = Modifier.fillMaxWidth(),
                         state = state,
                         onClickDoneItem = viewModel::onClickDoneItem,
@@ -87,11 +88,10 @@ fun MainScreen(
                     enter = slideInVertically(initialOffsetY = { it }),
                     exit = slideOutVertically(targetOffsetY = { it })
                 ) {
-                    CommonSubFeatureBottomView(
+                    DoneSubFeatureSnackBar(
                         modifier = Modifier.fillMaxWidth(),
-                        onClickInputBtn = {
-                            viewModel.onChangeBottomSheetState(MainBottomSheetTag.INPUT)
-                        }
+                        state = state,
+                        onClickRestoreBtn = viewModel::onClickRestoreBtn
                     )
                 }
                 QuickeeDoneItemListView(
