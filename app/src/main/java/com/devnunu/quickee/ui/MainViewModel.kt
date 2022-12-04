@@ -19,11 +19,6 @@ class MainViewModel : ContainerHost<MainState, MainSideEffect>, ViewModel() {
     /**
      * 클릭 이벤트 핸들러
      * */
-    fun onClickEditIcon() = intent {
-        reduce {
-            state.copy(isInputMode = !state.isInputMode)
-        }
-    }
 
     fun onClickDoneBtn() = intent {
         val itemList = state.itemList.toMutableList()

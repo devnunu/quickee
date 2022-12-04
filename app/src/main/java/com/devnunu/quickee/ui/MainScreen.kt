@@ -55,7 +55,6 @@ fun MainScreen(
                         .padding(top = 10.dp, bottom = 10.dp),
                     state = state,
                     onValueChange = viewModel::onChangeInputValue,
-                    onClickEditIcon = viewModel::onClickEditIcon,
                     onClickDoneBtn = viewModel::onClickDoneBtn
                 )
             }
