@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.devnunu.quickee.ext.clickableNonRipple
 import com.devnunu.quickee.theme.ROTATE_DURATION
 import com.devnunu.quickee.ui.MainState
 
@@ -60,7 +61,7 @@ fun QuickeeMainInput(
             modifier = Modifier
                 .size(45.dp, 45.dp)
                 .rotate(rotation.value)
-                .clickable { onClickEditIcon() },
+                .clickableNonRipple { onClickEditIcon() },
             imageVector = Icons.Filled.Add,
             contentDescription = null,
         )
