@@ -1,7 +1,9 @@
 package com.devnunu.quickee.ui.components
 
+import androidx.compose.animation.*
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -29,6 +31,7 @@ import com.devnunu.quickee.theme.PurpleGrey80
 import com.devnunu.quickee.theme.ROTATE_DURATION
 import com.devnunu.quickee.ui.MainState
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun QuickeeMainInput(
     modifier: Modifier = Modifier,
@@ -75,32 +78,38 @@ fun QuickeeMainInput(
             imageVector = Icons.Filled.Add,
             contentDescription = null,
         )
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(45.dp)
-                .padding(start = 10.dp)
-                .border(2.dp, PurpleGrey80, RoundedCornerShape(20.dp)),
-            verticalAlignment = Alignment.CenterVertically
+        AnimatedVisibility(
+            visible = state.isInputMode,
+            enter = expandHorizontally() + scaleIn() + fadeIn(),
+            exit = shrinkHorizontally() + scaleOut() + fadeOut()
         ) {
-            BasicTextField(
+            Row(
                 modifier = Modifier
-                    .weight(1f)
-                    .padding(start = 15.dp, end = 15.dp),
-                singleLine = true,
-                value = state.inputValue.orEmpty(),
-                onValueChange = onValueChange,
-            )
-            Icon(
-                modifier = Modifier
-                    .size(45.dp, 45.dp)
-                    .padding(5.dp)
-                    .background(PurpleGrey80, RoundedCornerShape(20.dp))
-                    .padding(5.dp),
-                imageVector = Icons.Default.Done,
-                contentDescription = null,
-                tint = Color.White
-            )
+                    .fillMaxWidth()
+                    .height(45.dp)
+                    .padding(end = 10.dp)
+                    .border(2.dp, PurpleGrey80, RoundedCornerShape(20.dp)),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                BasicTextField(
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(start = 15.dp, end = 15.dp),
+                    singleLine = true,
+                    value = state.inputValue.orEmpty(),
+                    onValueChange = onValueChange,
+                )
+                Icon(
+                    modifier = Modifier
+                        .size(45.dp, 45.dp)
+                        .padding(5.dp)
+                        .background(PurpleGrey80, RoundedCornerShape(20.dp))
+                        .padding(5.dp),
+                    imageVector = Icons.Default.Done,
+                    contentDescription = null,
+                    tint = Color.White
+                )
+            }
         }
     }
 }
