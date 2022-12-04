@@ -13,4 +13,6 @@ interface ItemRepository {
     fun deleteQuickeeItem(item: QuickeeItem)
 
     fun updateQuickeeItemDone(item: QuickeeItem, isDone: Boolean)
+
+    fun updateQuickeeItemValue(item: QuickeeItem, value: String)
 }

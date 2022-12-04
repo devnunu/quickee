@@ -11,7 +11,7 @@ import com.devnunu.quickee.ui.components.QuickeeMainInput
 fun MainInputBottomSheet(
     state: MainState,
     onValueChange: (String) -> Unit,
-    onClickDoneBtn: () -> Unit
+    onClickRegisterBtn: () -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxWidth()
@@ -19,7 +19,7 @@ fun MainInputBottomSheet(
         QuickeeMainInput(
             state = state,
             onValueChange = onValueChange,
-            onClickDoneBtn = onClickDoneBtn
+            onClickRegisterBtn = onClickRegisterBtn
         )
     }
 }

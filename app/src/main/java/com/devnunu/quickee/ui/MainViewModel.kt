@@ -60,16 +60,21 @@ class MainViewModel(
     fun onClickRegisterBtn() = intent {
         val inputValue = state.inputValue
         if (!inputValue.isNullOrBlank()) {
-            val item = QuickeeItem(value = inputValue)
-            itemRepository.addQuickeeItem(item)
+            val isEditMode = state.hasSelectedItem
+            if (isEditMode) {
+                state.selectedItem?.let { item ->
+                    itemRepository.updateQuickeeItemValue(item, inputValue)
+                }
+            } else {
+                itemRepository.addQuickeeItem(QuickeeItem(value = inputValue))
+            }
             reduce {
                 state.copy(
                     showBottomSheetTag = null,
-                    inputValue = null
+                    inputValue = null,
+                    selectedItem = null
                 )
             }
-        } else {
-            // TODO : error
         }
     }
 
@@ -92,12 +97,25 @@ class MainViewModel(
     }
 
     /**
-     * In Progress SnackBar Btn
+     * SnackBar Btn
      * */
     fun onClickDoneItem(item: QuickeeItem) = intent {
         itemRepository.updateQuickeeItemDone(item, true)
         reduce {
-            state.copy(selectedItem = null)
+            state.copy(
+                selectedItem = null,
+                isOpenDoneItemSnackBar = false
+            )
+        }
+    }
+
+    fun onClickRestoreBtn(item: QuickeeItem) = intent {
+        itemRepository.updateQuickeeItemDone(item, false)
+        reduce {
+            state.copy(
+                selectedItem = null,
+                isOpenDoneItemSnackBar = false
+            )
         }
     }
 
@@ -108,13 +126,13 @@ class MainViewModel(
         }
     }
 
-    /**
-     * Done Snack Bar Btn
-     * */
-    fun onClickRestoreBtn(item: QuickeeItem) = intent {
-        itemRepository.updateQuickeeItemDone(item, false)
+    fun onClickEditItem(item: QuickeeItem) = intent {
         reduce {
-            state.copy(selectedItem = null)
+            state.copy(
+                selectedItem = item,
+                inputValue = item.value,
+                showBottomSheetTag = MainBottomSheetTag.INPUT
+            )
         }
     }
 

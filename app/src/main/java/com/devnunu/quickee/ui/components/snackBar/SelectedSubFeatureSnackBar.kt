@@ -1,4 +1,4 @@
-package com.devnunu.quickee.ui.components.view
+package com.devnunu.quickee.ui.components.snackBar
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -19,6 +19,7 @@ import com.devnunu.quickee.ui.components.btn.SubFeatureIconWithTextBtn
 fun SelectedSubFeatureSnackBar(
     modifier: Modifier = Modifier,
     state: MainState,
+    onClickEditItem: (QuickeeItem) -> Unit,
     onClickDoneItem: (QuickeeItem) -> Unit,
     onClickDeleteItem: (QuickeeItem) -> Unit
 ) {
@@ -26,6 +27,16 @@ fun SelectedSubFeatureSnackBar(
         modifier = modifier
             .padding(horizontal = 15.dp, vertical = 15.dp)
     ) {
+        SubFeatureIconBtn(
+            modifier = Modifier.padding(end = 10.dp),
+            imageVector = Icons.Default.Edit,
+            background = Color.LightGray,
+            onClickBtn = {
+                state.selectedItem?.let {
+                    onClickEditItem(it)
+                }
+            }
+        )
         SubFeatureIconBtn(
             imageVector = Icons.Default.Delete,
             background = Color.LightGray,
@@ -56,6 +67,7 @@ fun SelectedSubFeatureSnackBar(
 fun SelectedSubFeatureBottomViewPreview() {
     SelectedSubFeatureSnackBar(
         state = MainState(),
+        onClickEditItem = {},
         onClickDoneItem = {},
         onClickDeleteItem = {}
     )

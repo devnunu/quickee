@@ -18,7 +18,7 @@ fun MainBottomSheet(viewModel: MainViewModel) {
             MainInputBottomSheet(
                 state = state,
                 onValueChange = viewModel::onChangeInputValue,
-                onClickDoneBtn = viewModel::onClickRegisterBtn
+                onClickRegisterBtn = viewModel::onClickRegisterBtn
             )
         }
         else -> Unit

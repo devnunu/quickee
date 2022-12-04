@@ -24,4 +24,10 @@ class ItemRepositoryImpl(
             quickeeItemDao.updateQuickeeItemDone(id, isDone)
         }
     }
+
+    override fun updateQuickeeItemValue(item: QuickeeItem, value: String) {
+        item.id?.let { id ->
+            quickeeItemDao.updateQuickeeItemValue(id, value)
+        }
+    }
 }

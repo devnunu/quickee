@@ -18,4 +18,7 @@ interface QuickeeItemDao {
 
     @Query("UPDATE items SET isDone = :isDone WHERE id = :id")
     fun updateQuickeeItemDone(id: Int, isDone: Boolean)
+
+    @Query("UPDATE items SET value = :value WHERE id = :id")
+    fun updateQuickeeItemValue(id: Int, value: String)
 }

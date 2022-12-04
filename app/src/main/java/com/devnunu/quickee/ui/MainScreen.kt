@@ -21,10 +21,9 @@ import com.devnunu.quickee.ext.clickableNonRipple
 import com.devnunu.quickee.theme.QuickeeTheme
 import com.devnunu.quickee.ui.components.view.QuickeeDoneItemListView
 import com.devnunu.quickee.ui.components.view.QuickeeInProgressItemListView
-import com.devnunu.quickee.ui.components.view.SelectedSubFeatureSnackBar
+import com.devnunu.quickee.ui.components.snackBar.SelectedSubFeatureSnackBar
 import com.devnunu.quickee.ui.components.bottomSheet.MainBottomSheet
-import com.devnunu.quickee.ui.components.bottomSheet.MainBottomSheetTag
-import com.devnunu.quickee.ui.components.view.DoneSubFeatureSnackBar
+import com.devnunu.quickee.ui.components.snackBar.DoneSubFeatureSnackBar
 import org.koin.androidx.compose.koinViewModel
 import org.orbitmvi.orbit.compose.collectAsState
 
@@ -79,6 +78,7 @@ fun MainScreen(
                     SelectedSubFeatureSnackBar(
                         modifier = Modifier.fillMaxWidth(),
                         state = state,
+                        onClickEditItem = viewModel::onClickEditItem,
                         onClickDoneItem = viewModel::onClickDoneItem,
                         onClickDeleteItem = viewModel::onClickDeleteItem
                     )
@@ -91,6 +91,7 @@ fun MainScreen(
                     DoneSubFeatureSnackBar(
                         modifier = Modifier.fillMaxWidth(),
                         state = state,
+                        onClickDeleteItem = viewModel::onClickDeleteItem,
                         onClickRestoreBtn = viewModel::onClickRestoreBtn
                     )
                 }
