@@ -41,7 +41,7 @@ fun QuickeeDoneItemListView(
             FlowRow(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .heightIn(max = 100.dp)
+                    .heightIn(max = 150.dp)
                     .verticalScroll(rememberScrollState())
                     .background(Color.Black)
                     .padding(top = 20.dp, start = 15.dp, end = 15.dp)
