@@ -3,8 +3,6 @@ package com.devnunu.quickee.data.repository
 import com.devnunu.quickee.data.model.QuickeeItem
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.filter
 
 class ItemRepositoryImpl : ItemRepository {
 
@@ -28,8 +26,9 @@ class ItemRepositoryImpl : ItemRepository {
     override fun updateQuickeeItemDone(item: QuickeeItem) {
         val itemList = quickeeItemList.value
         val index = itemList.indexOf(item)
-        if (index > 0) {
+        if (index >= 0) {
             itemList.getOrNull(index)?.isDone = true
         }
+        quickeeItemList.value = itemList
     }
 }

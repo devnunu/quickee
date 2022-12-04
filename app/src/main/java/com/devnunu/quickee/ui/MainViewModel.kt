@@ -64,6 +64,13 @@ class MainViewModel(
         }
     }
 
+    fun onClickDoneItem(item: QuickeeItem) = intent {
+        itemRepository.updateQuickeeItemDone(item)
+        reduce {
+            state.copy(selectedItem = null)
+        }
+    }
+
     fun onClickDeleteItem(item: QuickeeItem) = intent {
         itemRepository.deleteQuickeeItem(item)
         reduce {
