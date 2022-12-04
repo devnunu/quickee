@@ -18,10 +18,11 @@ class MainViewModel(
         start()
     }
 
-    fun start() = intent {
+    private fun start() = intent {
         reduce {
             state.copy(
-                itemList = itemRepository.getQuickeeInProgressItemList()
+                inProgressItemList = itemRepository.getQuickeeInProgressItemList(),
+                doneItemList = itemRepository.getQuickeeDoneItemList()
             )
         }
     }
@@ -37,7 +38,7 @@ class MainViewModel(
      * */
 
     fun onClickDoneBtn() = intent {
-        val itemList = state.itemList.toMutableList()
+        val itemList = state.inProgressItemList.toMutableList()
         val inputValue = state.inputValue
         if (!inputValue.isNullOrBlank()) {
             itemList.add(0, QuickeeItem(value = inputValue))
@@ -48,18 +49,18 @@ class MainViewModel(
         reduce {
             state.copy(
                 inputValue = "",
-                itemList = itemList,
+                inProgressItemList = itemList,
                 selectedItem = null
             )
         }
     }
 
     fun onClickDeleteItem(item: QuickeeItem) = intent {
-        val itemList = state.itemList.toMutableList()
+        val itemList = state.inProgressItemList.toMutableList()
         itemList.remove(item)
         reduce {
             state.copy(
-                itemList = itemList,
+                inProgressItemList = itemList,
                 selectedItem = null
             )
         }

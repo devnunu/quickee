@@ -9,6 +9,6 @@ class ItemRepositoryImpl : ItemRepository {
     override fun getQuickeeInProgressItemList(): List<QuickeeItem> =
         quickeeItemList.filter { !it.isDone }
 
-    override fun getQuickeeDoneItemCount(): Int =
-        quickeeItemList.count { it.isDone }
+    override fun getQuickeeDoneItemList(): List<QuickeeItem> =
+        quickeeItemList.filter { it.isDone }
 }

@@ -16,8 +16,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.devnunu.quickee.theme.QuickeeTheme
+import com.devnunu.quickee.ui.components.QuickeeDoneItemListView
 import com.devnunu.quickee.ui.components.QuickeeMainInput
-import com.devnunu.quickee.ui.components.QuickeeMainItemListView
+import com.devnunu.quickee.ui.components.QuickeeInProgressItemListView
 import com.devnunu.quickee.ui.components.SelectedSubFeatureBottomView
 import org.koin.androidx.compose.koinViewModel
 import org.orbitmvi.orbit.compose.collectAsState
@@ -37,7 +38,7 @@ fun MainScreen(
                 modifier = Modifier
                     .fillMaxSize(),
             ) {
-                QuickeeMainItemListView(
+                QuickeeInProgressItemListView(
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(1f)
@@ -64,6 +65,9 @@ fun MainScreen(
                     state = state,
                     onValueChange = viewModel::onChangeInputValue,
                     onClickDoneBtn = viewModel::onClickDoneBtn
+                )
+                QuickeeDoneItemListView(
+                    state = state
                 )
             }
         }

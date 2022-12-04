@@ -16,19 +16,17 @@ import com.devnunu.quickee.data.model.QuickeeItem
 import com.devnunu.quickee.ext.clickableNonRipple
 import com.devnunu.quickee.ui.MainState
 import com.google.accompanist.flowlayout.FlowRow
-import com.google.accompanist.flowlayout.SizeMode
 
 @Composable
-fun QuickeeMainItemListView(
+fun QuickeeInProgressItemListView(
     modifier: Modifier = Modifier,
     state: MainState,
     onSelectedItem: (QuickeeItem) -> Unit
 ) {
     FlowRow(
         modifier = modifier,
-        mainAxisSize = SizeMode.Expand
     ) {
-        state.itemList.forEachIndexed { index, item ->
+        state.inProgressItemList.forEachIndexed { index, item ->
             Row(
                 modifier = Modifier
                     .height(IntrinsicSize.Min)
@@ -62,10 +60,10 @@ fun QuickeeMainItemListView(
 
 @Preview(showBackground = true)
 @Composable
-fun QuickeeMainItemListViewPreview() {
-    QuickeeMainItemListView(
+fun QuickeeInProgressItemListViewPreview() {
+    QuickeeInProgressItemListView(
         state = MainState(
-            itemList = listOf(
+            inProgressItemList = listOf(
                 QuickeeItem(value = "clean"),
                 QuickeeItem(value = "go to market"),
                 QuickeeItem(value = "buy a book"),
