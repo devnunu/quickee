@@ -24,4 +24,31 @@ class MainViewModel : ContainerHost<MainState, MainSideEffect>, ViewModel() {
             state.copy(isInputMode = !state.isInputMode)
         }
     }
+
+    fun onClickDoneBtn() = intent {
+        val itemList = state.itemList.toMutableList()
+        val inputValue = state.inputValue
+        if (!inputValue.isNullOrBlank()) {
+            itemList.add(inputValue)
+        } else {
+            // TODO : error
+        }
+
+        reduce {
+            state.copy(
+                inputValue = "",
+                itemList = itemList
+            )
+        }
+    }
+
+    fun onClickDeleteItem(item: String) = intent {
+        val itemList = state.itemList.toMutableList()
+        itemList.remove(item)
+        reduce {
+            state.copy(
+                itemList = itemList
+            )
+        }
+    }
 }
