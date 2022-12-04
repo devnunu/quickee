@@ -13,7 +13,8 @@ import com.devnunu.quickee.ui.MainScreen
 fun QuickeeNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    startDestination: String = MAIN
+    startDestination: String = MAIN,
+    onBackPressed: () -> Unit
 ) {
     NavHost(
         modifier = modifier,
@@ -21,7 +22,9 @@ fun QuickeeNavHost(
         startDestination = startDestination
     ) {
         composable(MAIN) {
-            MainScreen()
+            MainScreen(
+                onBackPressed = onBackPressed
+            )
         }
     }
 }

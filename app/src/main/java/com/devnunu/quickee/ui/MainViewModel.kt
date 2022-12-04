@@ -3,6 +3,7 @@ package com.devnunu.quickee.ui
 import androidx.lifecycle.ViewModel
 import com.devnunu.quickee.data.model.QuickeeItem
 import com.devnunu.quickee.data.repository.ItemRepository
+import com.devnunu.quickee.ui.components.bottomSheet.MainBottomSheetTag
 import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.reduce
@@ -36,6 +37,11 @@ class MainViewModel(
     /**
      * 클릭 이벤트 핸들러
      * */
+    fun onChangeBottomSheetState(bottomSheetTag: MainBottomSheetTag?) = intent {
+        reduce {
+            state.copy(showBottomSheetTag = bottomSheetTag)
+        }
+    }
 
     fun onClickDoneBtn() = intent {
         val itemList = state.inProgressItemList.toMutableList()

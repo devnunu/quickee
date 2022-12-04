@@ -9,8 +9,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -25,16 +29,21 @@ fun QuickeeMainInput(
     onValueChange: (String) -> Unit,
     onClickDoneBtn: () -> Unit
 ) {
+    val focusRequester = remember { FocusRequester() }
+
+    LaunchedEffect(Unit) {
+        focusRequester.requestFocus()
+    }
     Row(
         modifier = modifier
             .fillMaxWidth()
             .height(45.dp)
-            .padding(start = 10.dp, end = 10.dp)
-            .border(2.dp, PurpleGrey80, RoundedCornerShape(20.dp)),
+            .padding(start = 10.dp, end = 10.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         BasicTextField(
             modifier = Modifier
+                .focusRequester(focusRequester = focusRequester)
                 .weight(1f)
                 .padding(start = 15.dp, end = 15.dp),
             singleLine = true,
