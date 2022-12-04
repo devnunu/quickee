@@ -25,21 +25,21 @@ fun SelectedSubFeatureBottomView(
 ) {
     Row(
         modifier = modifier
-            .padding(10.dp)
+            .padding(horizontal = 15.dp, vertical = 15.dp)
     ) {
         Spacer(
             modifier = Modifier.weight(1f)
         )
         Icon(
             modifier = Modifier
-                .size(35.dp)
+                .background(Color.LightGray, RoundedCornerShape(5.dp))
+                .padding(horizontal = 12.dp, vertical = 3.dp)
+                .size(18.dp)
                 .clickableNonRipple {
                     state.selectedItem?.let {
                         onClickDeleteItem(it)
                     }
-                }
-                .background(Color.Black, RoundedCornerShape(10.dp))
-                .padding(5.dp),
+                },
             imageVector = Icons.Default.Delete,
             contentDescription = null,
             tint = Color.White
