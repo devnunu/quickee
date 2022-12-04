@@ -99,7 +99,4 @@ dependencies {
     implementation("org.orbit-mvi:orbit-core:$orbit_version")
     implementation("org.orbit-mvi:orbit-viewmodel:$orbit_version")
     implementation("org.orbit-mvi:orbit-compose:$orbit_version")
-
-    // material design
-    implementation("com.google.android.material:material:$material_design_version")
 }
