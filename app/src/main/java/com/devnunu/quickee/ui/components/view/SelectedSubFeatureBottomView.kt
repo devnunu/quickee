@@ -26,25 +26,24 @@ fun SelectedSubFeatureBottomView(
         modifier = modifier
             .padding(horizontal = 15.dp, vertical = 15.dp)
     ) {
+        SubFeatureIconBtn(
+            imageVector = Icons.Default.Delete,
+            background = Color.LightGray,
+            onClickBtn = {
+                state.selectedItem?.let {
+                    onClickDeleteItem(it)
+                }
+            }
+        )
         Spacer(
             modifier = Modifier.weight(1f)
         )
         SubFeatureIconBtn(
-            modifier = Modifier.padding(end = 10.dp),
             imageVector = Icons.Default.Done,
-            background = Color.Green,
+            background = Color.LightGray,
             onClickBtn = {
                 state.selectedItem?.let {
                     onClickDoneItem(it)
-                }
-            }
-        )
-        SubFeatureIconBtn(
-            imageVector = Icons.Default.Delete,
-            background = Color.Red,
-            onClickBtn = {
-                state.selectedItem?.let {
-                    onClickDeleteItem(it)
                 }
             }
         )

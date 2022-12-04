@@ -25,7 +25,7 @@ fun SubFeatureIconBtn(
     Icon(
         modifier = modifier
             .background(background, RoundedCornerShape(5.dp))
-            .padding(horizontal = 12.dp, vertical = 3.dp)
+            .padding(horizontal = 12.dp, vertical = 5.dp)
             .size(18.dp)
             .clickableNonRipple {
                 onClickBtn()

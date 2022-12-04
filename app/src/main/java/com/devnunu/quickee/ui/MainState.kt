@@ -6,6 +6,8 @@ import com.devnunu.quickee.ui.components.bottomSheet.MainBottomSheetTag
 data class MainState(
     val showBottomSheetTag: MainBottomSheetTag? = null,
     val isOpenDoneListView: Boolean = false,
+    val isOpenInProgressItemSnackBar: Boolean = false,
+    val isOpenDoneItemSnackBar: Boolean = false,
     val inputValue: String? = null,
     val selectedItem: QuickeeItem? = null,
     val inProgressItemList: List<QuickeeItem> = emptyList(),
@@ -16,4 +18,7 @@ data class MainState(
 
     val isShowBottomSheet: Boolean
         get() = showBottomSheetTag != null
+
+    val hasSelectedItem: Boolean
+        get() = selectedItem != null
 }

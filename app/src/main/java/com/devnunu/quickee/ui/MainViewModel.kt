@@ -40,7 +40,7 @@ class MainViewModel(
     }
 
     /**
-     * 클릭 이벤트 핸들러
+     * Show Bottom Sheet
      * */
     fun onChangeBottomSheetState(bottomSheetTag: MainBottomSheetTag?) = intent {
         reduce {
@@ -48,6 +48,9 @@ class MainViewModel(
         }
     }
 
+    /**
+     * Open Animate Visible View
+     * */
     fun onClickOpenDoneListView() = intent {
         reduce {
             state.copy(isOpenDoneListView = !state.isOpenDoneListView)
@@ -70,6 +73,27 @@ class MainViewModel(
         }
     }
 
+    /**
+     * Item Select
+     * */
+    fun onSelectedItem(item: QuickeeItem) = intent {
+        reduce {
+            val isClickNotSameArea =
+                state.selectedItem != null && state.selectedItem?.isDone != item.isDone
+            val isClickSameItem = state.selectedItem == item
+            val isResetSelectedItem = isClickSameItem || isClickNotSameArea
+            state.copy(
+                selectedItem = if (isResetSelectedItem) null else item,
+                isOpenInProgressItemSnackBar = if (isResetSelectedItem) false else !item.isDone,
+                isOpenDoneItemSnackBar = if (isResetSelectedItem) false else item.isDone
+            )
+
+        }
+    }
+
+    /**
+     * In Progress SnackBar Btn
+     * */
     fun onClickDoneItem(item: QuickeeItem) = intent {
         itemRepository.updateQuickeeItemDone(item)
         reduce {
@@ -84,11 +108,5 @@ class MainViewModel(
         }
     }
 
-    fun onSelectedItem(item: QuickeeItem) = intent {
-        reduce {
-            state.copy(
-                selectedItem = if (state.selectedItem == item) null else item
-            )
-        }
-    }
+
 }

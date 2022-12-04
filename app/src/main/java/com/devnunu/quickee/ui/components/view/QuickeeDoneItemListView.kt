@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.devnunu.quickee.data.model.QuickeeItem
 import com.devnunu.quickee.ext.clickableNonRipple
 import com.devnunu.quickee.ui.MainState
 import com.google.accompanist.flowlayout.FlowRow
@@ -25,7 +26,8 @@ import com.google.accompanist.flowlayout.FlowRow
 fun QuickeeDoneItemListView(
     modifier: Modifier = Modifier,
     state: MainState,
-    onClickOpenDoneListView: () -> Unit
+    onClickOpenDoneListView: () -> Unit,
+    onSelectedItem: (QuickeeItem) -> Unit
 ) {
     Column(
         modifier = modifier
@@ -42,13 +44,15 @@ fun QuickeeDoneItemListView(
                     .heightIn(max = 100.dp)
                     .verticalScroll(rememberScrollState())
                     .background(Color.Black)
-                    .padding(top = 20.dp, start = 15.dp, end = 15.dp, bottom = 10.dp)
+                    .padding(top = 20.dp, start = 15.dp, end = 15.dp)
             ) {
                 state.doneItemList.forEachIndexed { index, item ->
+                    val isSelectedItem = state.hasSelectedItem && state.selectedItem == item
                     Row(
                         modifier = Modifier
                             .height(IntrinsicSize.Min)
-                            .padding(vertical = 3.dp),
+                            .padding(bottom = 6.dp)
+                            .clickableNonRipple { onSelectedItem(item) },
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         if (index != 0) {
@@ -66,7 +70,7 @@ fun QuickeeDoneItemListView(
                             text = item.value,
                             fontSize = 14.sp,
                             fontWeight = FontWeight.Bold,
-                            color = Color.Gray
+                            color = if(isSelectedItem) Color.White else Color.Gray
                         )
                     }
                 }
