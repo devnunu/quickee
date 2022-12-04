@@ -99,4 +99,7 @@ dependencies {
     implementation("org.orbit-mvi:orbit-core:$orbit_version")
     implementation("org.orbit-mvi:orbit-viewmodel:$orbit_version")
     implementation("org.orbit-mvi:orbit-compose:$orbit_version")
+
+    // accompanist
+    implementation "com.google.accompanist:accompanist-flowlayout:$accompanist_version"
 }
