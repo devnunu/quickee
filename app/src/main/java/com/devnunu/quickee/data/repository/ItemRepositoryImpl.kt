@@ -1,34 +1,27 @@
 package com.devnunu.quickee.data.repository
 
+import com.devnunu.quickee.data.dao.QuickeeItemDao
 import com.devnunu.quickee.data.model.QuickeeItem
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.Flow
 
-class ItemRepositoryImpl : ItemRepository {
+class ItemRepositoryImpl(
+    private val quickeeItemDao: QuickeeItemDao
+) : ItemRepository {
 
-    private val quickeeItemList = MutableStateFlow<List<QuickeeItem>>(emptyList())
-
-    override fun getQuickeeItemList(): StateFlow<List<QuickeeItem>> =
-        quickeeItemList
+    override fun getQuickeeItemList(): Flow<List<QuickeeItem>> =
+        quickeeItemDao.getQuickeeItemList()
 
     override fun addQuickeeItem(item: QuickeeItem) {
-        val itemList = quickeeItemList.value.toMutableList()
-        itemList.add(0, item)
-        quickeeItemList.value = itemList
+        quickeeItemDao.addQuickeeItem(item)
     }
 
     override fun deleteQuickeeItem(item: QuickeeItem) {
-        val itemList = quickeeItemList.value.toMutableList()
-        itemList.remove(item)
-        quickeeItemList.value = itemList
+        quickeeItemDao.deleteQuickeeItem(item)
     }
 
     override fun updateQuickeeItemDone(item: QuickeeItem) {
-        val itemList = quickeeItemList.value
-        val index = itemList.indexOf(item)
-        if (index >= 0) {
-            itemList.getOrNull(index)?.isDone = true
+        item.id?.let { id ->
+            quickeeItemDao.updateQuickeeItemDone(id)
         }
-        quickeeItemList.value = itemList
     }
 }
