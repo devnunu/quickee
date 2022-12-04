@@ -48,6 +48,12 @@ class MainViewModel(
         }
     }
 
+    fun onClickOpenDoneListView() = intent {
+        reduce {
+            state.copy(isOpenDoneListView = !state.isOpenDoneListView)
+        }
+    }
+
     fun onClickRegisterBtn() = intent {
         val inputValue = state.inputValue
         if (!inputValue.isNullOrBlank()) {

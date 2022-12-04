@@ -1,7 +1,10 @@
-package com.devnunu.quickee.ui.components
+package com.devnunu.quickee.ui.components.view
 
+import androidx.compose.animation.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material3.Divider
@@ -11,52 +14,72 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.devnunu.quickee.ext.clickableNonRipple
 import com.devnunu.quickee.ui.MainState
 import com.google.accompanist.flowlayout.FlowRow
 
 @Composable
 fun QuickeeDoneItemListView(
     modifier: Modifier = Modifier,
-    state: MainState
+    state: MainState,
+    onClickOpenDoneListView: () -> Unit
 ) {
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .background(Color.LightGray)
-            .padding(15.dp),
     ) {
-        FlowRow(
-            modifier = Modifier.padding(horizontal = 10.dp)
+        AnimatedVisibility(
+            visible = state.isOpenDoneListView,
+            enter = expandVertically(),
+            exit = shrinkVertically()
         ) {
-            state.doneItemList.forEachIndexed { index, item ->
-                Row(
-                    modifier = Modifier
-                        .height(IntrinsicSize.Min)
-                        .padding(vertical = 3.dp),
-                ) {
-                    if (index != 0) {
-                        Divider(
+            FlowRow(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .heightIn(max = 100.dp)
+                    .verticalScroll(rememberScrollState())
+                    .background(Color.Black)
+                    .padding(top = 20.dp, start = 15.dp, end = 15.dp, bottom = 10.dp)
+            ) {
+                state.doneItemList.forEachIndexed { index, item ->
+                    Row(
+                        modifier = Modifier
+                            .height(IntrinsicSize.Min)
+                            .padding(vertical = 3.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        if (index != 0) {
+                            Divider(
+                                modifier = Modifier
+                                    .padding(horizontal = 5.dp)
+                                    .height(10.dp)
+                                    .width(1.5.dp),
+                                color = Color.Gray,
+                            )
+                        }
+                        Text(
                             modifier = Modifier
-                                .padding(horizontal = 5.dp)
-                                .fillMaxHeight()
-                                .width(1.dp),
-                            color = Color.LightGray,
+                                .padding(horizontal = 5.dp, vertical = 3.dp),
+                            text = item.value,
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.Gray
                         )
                     }
-                    Text(
-                        modifier = Modifier
-                            .padding(horizontal = 5.dp, vertical = 3.dp),
-                        text = item.value,
-                        fontSize = 14.sp,
-                        color = Color.Gray
-                    )
                 }
             }
-
         }
         Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color.Black)
+                .clickableNonRipple {
+                    onClickOpenDoneListView()
+                }
+                .padding(15.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
@@ -69,6 +92,7 @@ fun QuickeeDoneItemListView(
                 modifier = Modifier.padding(start = 5.dp),
                 text = "${state.doneItemCount} items has been done",
                 fontSize = 14.sp,
+                fontWeight = FontWeight.Bold,
                 color = Color.Gray
             )
         }

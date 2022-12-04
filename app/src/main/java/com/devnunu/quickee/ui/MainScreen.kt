@@ -17,7 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.devnunu.quickee.components.QuickeeScaffold
 import com.devnunu.quickee.theme.QuickeeTheme
-import com.devnunu.quickee.ui.components.QuickeeDoneItemListView
+import com.devnunu.quickee.ui.components.view.QuickeeDoneItemListView
 import com.devnunu.quickee.ui.components.QuickeeInProgressItemListView
 import com.devnunu.quickee.ui.components.view.SelectedSubFeatureBottomView
 import com.devnunu.quickee.ui.components.bottomSheet.MainBottomSheet
@@ -81,12 +81,9 @@ fun MainScreen(
                         }
                     )
                 }
-                Divider(
-                    thickness = 1.dp,
-                    color = Color.LightGray
-                )
                 QuickeeDoneItemListView(
-                    state = state
+                    state = state,
+                    onClickOpenDoneListView = viewModel::onClickOpenDoneListView
                 )
             }
         }
