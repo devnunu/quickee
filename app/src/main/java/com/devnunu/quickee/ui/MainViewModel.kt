@@ -24,7 +24,7 @@ class MainViewModel : ContainerHost<MainState, MainSideEffect>, ViewModel() {
         val itemList = state.itemList.toMutableList()
         val inputValue = state.inputValue
         if (!inputValue.isNullOrBlank()) {
-            itemList.add(inputValue)
+            itemList.add(0, inputValue)
         } else {
             // TODO : error
         }
