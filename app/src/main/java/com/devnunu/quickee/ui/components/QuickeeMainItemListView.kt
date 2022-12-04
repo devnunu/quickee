@@ -1,12 +1,11 @@
 package com.devnunu.quickee.ui.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,6 +18,7 @@ import androidx.compose.ui.unit.sp
 import com.devnunu.quickee.ext.clickableNonRipple
 import com.devnunu.quickee.ui.MainState
 import com.google.accompanist.flowlayout.FlowRow
+import com.google.accompanist.flowlayout.SizeMode
 
 @Composable
 fun QuickeeMainItemListView(
@@ -27,29 +27,27 @@ fun QuickeeMainItemListView(
     onClickDeleteItem: (String) -> Unit
 ) {
     FlowRow(
-        modifier = modifier
+        modifier = modifier,
+        mainAxisSize = SizeMode.Expand
     ) {
-        state.itemList.forEach { item ->
+        state.itemList.forEachIndexed { index, item ->
             Row(
                 modifier = Modifier
-                    .padding(end = 10.dp, bottom = 10.dp)
-                    .background(Color.LightGray, RoundedCornerShape(10.dp))
-                    .padding(horizontal = 5.dp, vertical = 3.dp),
-                verticalAlignment = Alignment.CenterVertically
+                    .height(IntrinsicSize.Min)
+                    .padding(vertical = 3.dp),
             ) {
+                if (index != 0) {
+                    Divider(
+                        modifier = Modifier
+                            .padding(horizontal = 5.dp)
+                            .fillMaxHeight()
+                            .width(1.dp),
+                        color = Color.LightGray,
+                    )
+                }
                 Text(
                     text = item,
-                    fontSize = 10.sp
-                )
-                Icon(
-                    modifier = Modifier
-                        .padding(start = 5.dp)
-                        .size(10.dp)
-                        .clickableNonRipple {
-                            onClickDeleteItem(item)
-                        },
-                    imageVector = Icons.Default.Close,
-                    contentDescription = null,
+                    fontSize = 14.sp
                 )
             }
         }
