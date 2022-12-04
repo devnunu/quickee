@@ -1,6 +1,6 @@
 package com.devnunu.quickee.ui
 
 data class MainState(
-    val temp: String
+    val inputValue: String? = null
 ) {
 }
