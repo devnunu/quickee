@@ -15,4 +15,6 @@ interface ItemRepository {
     fun updateQuickeeItemDone(item: QuickeeItem, isDone: Boolean)
 
     fun updateQuickeeItemValue(item: QuickeeItem, value: String)
+
+    fun updateQuickeeItemModifiedAt(item: QuickeeItem)
 }

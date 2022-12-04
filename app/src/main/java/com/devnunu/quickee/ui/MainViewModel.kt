@@ -25,8 +25,10 @@ class MainViewModel(
             itemRepository.getQuickeeItemList().collect { itemList ->
                 reduce {
                     state.copy(
-                        inProgressItemList = itemList.filter { !it.isDone }.sortedByDescending { it.modifiedAt },
-                        doneItemList = itemList.filter { it.isDone }.sortedByDescending { it.modifiedAt },
+                        inProgressItemList = itemList.filter { !it.isDone }
+                            .sortedByDescending { it.modifiedAt },
+                        doneItemList = itemList.filter { it.isDone }
+                            .sortedByDescending { it.modifiedAt },
                     )
                 }
             }
@@ -52,8 +54,10 @@ class MainViewModel(
      * Open Animate Visible View
      * */
     fun onClickOpenDoneListView() = intent {
-        reduce {
-            state.copy(isOpenDoneListView = !state.isOpenDoneListView)
+        if (state.doneItemCount != 0) {
+            reduce {
+                state.copy(isOpenDoneListView = !state.isOpenDoneListView)
+            }
         }
     }
 
@@ -132,6 +136,15 @@ class MainViewModel(
                 selectedItem = item,
                 inputValue = item.value,
                 showBottomSheetTag = MainBottomSheetTag.INPUT
+            )
+        }
+    }
+
+    fun onClickChangeSortOrder(item: QuickeeItem) = intent {
+        itemRepository.updateQuickeeItemModifiedAt(item)
+        reduce {
+            state.copy(
+                selectedItem = null
             )
         }
     }

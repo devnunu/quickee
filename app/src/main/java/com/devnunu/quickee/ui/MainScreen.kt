@@ -78,6 +78,7 @@ fun MainScreen(
                     SelectedSubFeatureSnackBar(
                         modifier = Modifier.fillMaxWidth(),
                         state = state,
+                        onClickChangeSortOrder = viewModel::onClickChangeSortOrder,
                         onClickEditItem = viewModel::onClickEditItem,
                         onClickDoneItem = viewModel::onClickDoneItem,
                         onClickDeleteItem = viewModel::onClickDeleteItem

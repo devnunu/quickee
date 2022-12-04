@@ -19,6 +19,7 @@ import com.devnunu.quickee.ui.components.btn.SubFeatureIconWithTextBtn
 fun SelectedSubFeatureSnackBar(
     modifier: Modifier = Modifier,
     state: MainState,
+    onClickChangeSortOrder: (QuickeeItem) -> Unit,
     onClickEditItem: (QuickeeItem) -> Unit,
     onClickDoneItem: (QuickeeItem) -> Unit,
     onClickDeleteItem: (QuickeeItem) -> Unit
@@ -27,6 +28,16 @@ fun SelectedSubFeatureSnackBar(
         modifier = modifier
             .padding(horizontal = 15.dp, vertical = 15.dp)
     ) {
+        SubFeatureIconBtn(
+            modifier = Modifier.padding(end = 10.dp),
+            imageVector = Icons.Default.ArrowBack,
+            background = Color.LightGray,
+            onClickBtn = {
+                state.selectedItem?.let {
+                    onClickChangeSortOrder(it)
+                }
+            }
+        )
         SubFeatureIconBtn(
             modifier = Modifier.padding(end = 10.dp),
             imageVector = Icons.Default.Edit,
@@ -67,6 +78,7 @@ fun SelectedSubFeatureSnackBar(
 fun SelectedSubFeatureBottomViewPreview() {
     SelectedSubFeatureSnackBar(
         state = MainState(),
+        onClickChangeSortOrder = {},
         onClickEditItem = {},
         onClickDoneItem = {},
         onClickDeleteItem = {}

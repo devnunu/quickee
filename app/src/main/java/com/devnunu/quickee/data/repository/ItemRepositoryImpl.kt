@@ -21,13 +21,19 @@ class ItemRepositoryImpl(
 
     override fun updateQuickeeItemDone(item: QuickeeItem, isDone: Boolean) {
         item.id?.let { id ->
-            quickeeItemDao.updateQuickeeItemDone(id, isDone)
+            quickeeItemDao.updateQuickeeItemDone(id, isDone, System.currentTimeMillis())
         }
     }
 
     override fun updateQuickeeItemValue(item: QuickeeItem, value: String) {
         item.id?.let { id ->
             quickeeItemDao.updateQuickeeItemValue(id, value)
+        }
+    }
+
+    override fun updateQuickeeItemModifiedAt(item: QuickeeItem) {
+        item.id?.let { id ->
+            quickeeItemDao.updateQuickeeItemModifiedAt(id, System.currentTimeMillis())
         }
     }
 }
