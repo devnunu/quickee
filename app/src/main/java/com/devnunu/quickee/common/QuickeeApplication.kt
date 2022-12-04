@@ -1,11 +1,10 @@
 package com.devnunu.quickee.common
 
 import android.app.Application
+import com.devnunu.quickee.di.dataModule
 import com.devnunu.quickee.di.uiModule
 import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
-import org.koin.dsl.module
 
 class QuickeeApplication : Application() {
 
@@ -13,7 +12,10 @@ class QuickeeApplication : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@QuickeeApplication)
-            modules(uiModule)
+            modules(
+                uiModule,
+                dataModule
+            )
         }
     }
 }

@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.devnunu.quickee.data.model.QuickeeItem
 import com.devnunu.quickee.ext.clickableNonRipple
 import com.devnunu.quickee.ui.MainState
 
@@ -21,7 +22,7 @@ import com.devnunu.quickee.ui.MainState
 fun SelectedSubFeatureBottomView(
     modifier: Modifier = Modifier,
     state: MainState,
-    onClickDeleteItem: (String) -> Unit
+    onClickDeleteItem: (QuickeeItem) -> Unit
 ) {
     Row(
         modifier = modifier
